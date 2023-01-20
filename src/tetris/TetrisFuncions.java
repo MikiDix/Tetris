@@ -8,33 +8,33 @@ public class TetrisFuncions {
 
     final static String PARET = "|";
     final static String TERRA = "_";
-    final static String BUIDA = "";
+    final static String BUIDA = " ";
     final static String PLENA = "X";
 
-    static String[][] CrearTaulell(int columnes, int files) {
+    static String[][] CrearTaulell(int files, int columnes) {
 
-        String[][] taulell = new String[columnes + 2][files + 6];
+        String[][] taulell = new String[files + 6][columnes + 2];
 
-        for (int i = 0; i < columnes + 2; i++) {
-            for (int j = 0; j < files + 6; j++) {
-                if (i == 0 || i == columnes + 2) {
-                    taulell[i][j].equals(PARET);
-                } else if (j == files + 6 || j == 4) {
-                    taulell[i][j].equals(TERRA);
+        for (int i = 0; i < files + 6; i++) {
+            for (int j = 0; j < columnes + 2; j++) {
+                if (i == files + 5 || i == 4) {
+                    taulell[i][j] = TERRA;
+                } else if (j == 0 || j == columnes + 1) {
+                    taulell[i][j] = PARET;
                 } else {
-                    taulell[i][j].equals(BUIDA);
+                    taulell[i][j] = BUIDA;
                 }
             }
         }
         return taulell;
     }
 
-    static void MostrarTaulell(String[][] taulell, int columnes, int files) {
-        for (int i = 0; i < columnes + 2; i++) {
-            for (int j = 0; j < files + 6; j++) {
-                System.out.println(taulell[i][j]);
+    static void MostrarTaulell(String[][] taulell, int files, int columnes) {
+        for (int i = 0; i < files + 6; i++) {
+            for (int j = 0; j < columnes + 2; j++) {
+                System.out.print(taulell[i][j]);
             }
-            System.out.println("");
+            System.out.println();
         }
     }
 
