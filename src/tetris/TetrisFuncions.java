@@ -47,7 +47,7 @@ public class TetrisFuncions {
         return moviments;
     }
 
-    static void MostrarMoviments(String[][] taulell, String[][] moviments, int files, int columnes) {
+    static void MostrarMoviments(String[][] moviments, int files, int columnes) {
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j <= columnes + 1; j++) {
@@ -57,7 +57,7 @@ public class TetrisFuncions {
         }
     }
 
-    static void MostrarTaulell(String[][] taulell, String[][] moviments, int files, int columnes) {
+    static void MostrarTaulell(String[][] taulell, int files, int columnes) {
 
         for (int i = 0; i <= files; i++) {
             for (int j = 0; j <= columnes + 1; j++) {
@@ -67,15 +67,7 @@ public class TetrisFuncions {
         }
     }
 
-    static void ImprimirPeca(int peca, String[][] moviments, int columnes) {
-
-        int meitat;
-
-        if (columnes % 2 == 0) {
-            meitat = columnes / 2;
-        } else {
-            meitat = (columnes + 1) / 2;
-        }
+    static void ImprimirPeca(int peca, String[][] moviments, int columnes, int meitat) {
 
         switch (peca) {
             case 1:
@@ -118,11 +110,11 @@ public class TetrisFuncions {
                 break;
         }
 
-        MourePeca(peca, moviments, meitat);
+        MourePeca(peca, moviments, meitat, columnes);
 
     }
 
-    static void MourePeca(int peca, String[][] moviments, int meitat) {
+    static void MourePeca(int peca, String[][] moviments, int meitat, int columnes) {
 
         Scanner s = new Scanner(System.in);
         String resposta;
@@ -134,7 +126,13 @@ public class TetrisFuncions {
 
             switch (resposta) {
                 case "a":
-
+                    meitat--;
+                    ImprimirPeca(peca, moviments, columnes, meitat);
+                    break;
+                case "d":
+                    meitat++;
+                    ImprimirPeca(peca, moviments, columnes, meitat);
+                    break;
             }
         } while (resposta != "s");
         BaixarPeca(moviments);
@@ -143,6 +141,20 @@ public class TetrisFuncions {
     static String[][] BaixarPeca(String[][] moviments) {
 
         return moviments;
+    }
+    
+    static String[][] BorrarLinia(String[][] taulell){
+        
+        
+        return taulell;
+    }
+    
+
+    static boolean ComprovarFinal() {
+
+        boolean comprovacio = false;
+
+        return comprovacio;
     }
 
 }
