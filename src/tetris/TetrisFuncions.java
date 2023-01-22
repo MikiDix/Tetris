@@ -67,7 +67,7 @@ public class TetrisFuncions {
         }
     }
 
-    static void ImprimirPeca(int peca, String[][] moviments, int columnes, int meitat) {
+    static void ImprimirPeca(int peca, String[][] moviments, String[][] taulell, int files, int columnes, int meitat) {
 
         switch (peca) {
             case 1:
@@ -109,12 +109,15 @@ public class TetrisFuncions {
                 }
                 break;
         }
+        
+        TetrisFuncions.MostrarMoviments(moviments, files, columnes);
+        TetrisFuncions.MostrarTaulell(taulell, files, columnes);
 
-        MourePeca(peca, moviments, meitat, columnes);
+        MourePeca(peca, moviments, taulell, meitat, files, columnes);
 
     }
 
-    static void MourePeca(int peca, String[][] moviments, int meitat, int columnes) {
+    static void MourePeca(int peca, String[][] moviments, String[][] taulell, int meitat, int files, int columnes) {
 
         Scanner s = new Scanner(System.in);
         String resposta;
@@ -127,11 +130,12 @@ public class TetrisFuncions {
             switch (resposta) {
                 case "a":
                     meitat--;
-                    ImprimirPeca(peca, moviments, columnes, meitat);
+                    moviments=CrearMoviments(columnes);
+                    ImprimirPeca(peca, moviments, taulell, files, columnes, meitat);
                     break;
                 case "d":
                     meitat++;
-                    ImprimirPeca(peca, moviments, columnes, meitat);
+                    ImprimirPeca(peca, moviments, taulell, files, columnes, meitat);
                     break;
             }
         } while (resposta != "s");
