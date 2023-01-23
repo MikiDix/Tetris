@@ -109,7 +109,7 @@ public class TetrisFuncions {
                 }
                 break;
         }
-        
+
         TetrisFuncions.MostrarMoviments(moviments, files, columnes);
         TetrisFuncions.MostrarTaulell(taulell, files, columnes);
 
@@ -130,7 +130,7 @@ public class TetrisFuncions {
             switch (resposta) {
                 case "a":
                     meitat--;
-                    moviments=CrearMoviments(columnes);
+                    moviments = CrearMoviments(columnes);
                     ImprimirPeca(peca, moviments, taulell, files, columnes, meitat);
                     break;
                 case "d":
@@ -139,20 +139,71 @@ public class TetrisFuncions {
                     break;
             }
         } while (resposta != "s");
-        BaixarPeca(moviments);
+        BaixarPeca(peca, meitat, files, columnes, taulell);
     }
 
-    static String[][] BaixarPeca(String[][] moviments) {
+    static void BaixarPeca(int peca, int meitat, int files, int columnes, String[][] taulell) {
 
-        return moviments;
+        int fila = 0;
+
+        switch (peca) {
+            case 1:
+                for (int i = 0; taulell[i + 1][meitat] == BUIDA && taulell[i + 1][meitat + 1] == BUIDA; i++) {
+                    fila = i;
+                }
+                for (int i = 0; i < files; i++) {
+                    for (int j = 1; j <= columnes; j++) {
+                        if ((i == fila && j == meitat) || (i == fila && j == meitat + 1) || (i == fila - 1 && j == meitat) || (i == fila - 1 && j == meitat + 1)) {
+                            taulell[i][j] = PLENA;
+                        }
+                    }
+                }
+                break;
+            case 2:
+                for (int i = 0; taulell[i + 1][meitat] == BUIDA && taulell[i + 1][meitat + 1] == BUIDA && taulell[i + 1][meitat + 2] == BUIDA; i++) {
+                    fila = i;
+                }
+                for (int i = 0; i < files; i++) {
+                    for (int j = 1; j <= columnes; j++) {
+                        if ((i == fila && j == meitat) || (i == fila && j == meitat + 1) || (i == fila && j == meitat + 2) || (i == fila - 1 && j == meitat)) {
+                            taulell[i][j] = PLENA;
+                        }
+                    }
+                }
+                break;
+            case 3:
+                for (int i = 0; taulell[i + 1][meitat] == BUIDA && taulell[i + 1][meitat + 1] == BUIDA; i++) {
+                    fila = i;
+                }
+                for (int i = 0; i < files; i++) {
+                    for (int j = 1; j <= columnes; j++) {
+                        if ((i == fila && j == meitat) || (i == fila && j == meitat + 1) || (i == fila - 1 && j == meitat + 1) || (i == fila - 2 && j == meitat + 1)) {
+                            taulell[i][j] = PLENA;
+                        }
+                    }
+                }
+                break;
+            case 4:
+                for (int i = 0; taulell[i + 1][meitat] == BUIDA; i++) {
+                    fila = i;
+                }
+                for (int i = 0; i < files; i++) {
+                    for (int j = 1; j <= columnes; j++) {
+                        if ((i == fila && j == meitat) || (i == fila - 1 && j == meitat) || (i == fila - 2 && j == meitat) || (i == fila - 3 && j == meitat)) {
+                            taulell[i][j] = PLENA;
+                        }
+                    }
+                }
+                break;
+        }
+        
+
     }
-    
-    static String[][] BorrarLinia(String[][] taulell){
-        
-        
+
+    static String[][] BorrarLinia(String[][] taulell) {
+
         return taulell;
     }
-    
 
     static boolean ComprovarFinal() {
 
