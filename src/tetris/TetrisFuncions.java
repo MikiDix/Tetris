@@ -113,11 +113,9 @@ public class TetrisFuncions {
         TetrisFuncions.MostrarMoviments(moviments, files, columnes);
         TetrisFuncions.MostrarTaulell(taulell, files, columnes);
 
-        MourePeca(peca, moviments, taulell, meitat, files, columnes);
-
     }
 
-    static void MourePeca(int peca, String[][] moviments, String[][] taulell, int meitat, int files, int columnes) {
+    static int MourePeca(int peca, String[][] moviments, String[][] taulell, int meitat, int files, int columnes) {
 
         Scanner s = new Scanner(System.in);
         String resposta;
@@ -127,28 +125,29 @@ public class TetrisFuncions {
             System.out.println("Per baixar la peça: 's'");
             resposta = s.nextLine();
 
-            switch (resposta) {
-                case "a":
-                    meitat--;
-                    moviments = CrearMoviments(columnes);
-                    ImprimirPeca(peca, moviments, taulell, files, columnes, meitat);
-                    break;
-                case "d":
-                    meitat++;
-                    ImprimirPeca(peca, moviments, taulell, files, columnes, meitat);
-                    break;
+            if ("a".equals(resposta)) {
+                meitat--;
+                moviments = CrearMoviments(columnes);
+                ImprimirPeca(peca, moviments, taulell, files, columnes, meitat);
+            } else if ("d".equals(resposta)) {
+                meitat++;
+                moviments = CrearMoviments(columnes);
+                ImprimirPeca(peca, moviments, taulell, files, columnes, meitat);
             }
-        } while (resposta != "s");
-        BaixarPeca(peca, meitat, files, columnes, taulell);
+
+        } while (!"s".equals(resposta));
+        
+        return meitat;
+
     }
 
-    static void BaixarPeca(int peca, int meitat, int files, int columnes, String[][] taulell) {
+    static String[][] BaixarPeca(int peca, int meitat, int files, int columnes, String[][] taulell) {
 
         int fila = 0;
 
         switch (peca) {
             case 1:
-                for (int i = 0; taulell[i + 1][meitat] == BUIDA && taulell[i + 1][meitat + 1] == BUIDA; i++) {
+                for (int i = 0; taulell[i + 1][meitat].equals(BUIDA) && taulell[i + 1][meitat + 1].equals(BUIDA); i++) {
                     fila = i;
                 }
                 for (int i = 0; i < files; i++) {
@@ -160,7 +159,7 @@ public class TetrisFuncions {
                 }
                 break;
             case 2:
-                for (int i = 0; taulell[i + 1][meitat] == BUIDA && taulell[i + 1][meitat + 1] == BUIDA && taulell[i + 1][meitat + 2] == BUIDA; i++) {
+                for (int i = 0; taulell[i + 1][meitat].equals(BUIDA) && taulell[i + 1][meitat + 1].equals(BUIDA) && taulell[i + 1][meitat + 2].equals(BUIDA); i++) {
                     fila = i;
                 }
                 for (int i = 0; i < files; i++) {
@@ -172,7 +171,7 @@ public class TetrisFuncions {
                 }
                 break;
             case 3:
-                for (int i = 0; taulell[i + 1][meitat] == BUIDA && taulell[i + 1][meitat + 1] == BUIDA; i++) {
+                for (int i = 0; taulell[i + 1][meitat].equals(BUIDA) && taulell[i + 1][meitat + 1].equals(BUIDA); i++) {
                     fila = i;
                 }
                 for (int i = 0; i < files; i++) {
@@ -184,7 +183,7 @@ public class TetrisFuncions {
                 }
                 break;
             case 4:
-                for (int i = 0; taulell[i + 1][meitat] == BUIDA; i++) {
+                for (int i = 0; taulell[i + 1][meitat].equals(BUIDA); i++) {
                     fila = i;
                 }
                 for (int i = 0; i < files; i++) {
@@ -195,19 +194,44 @@ public class TetrisFuncions {
                     }
                 }
                 break;
+
         }
-        
-
-    }
-
-    static String[][] BorrarLinia(String[][] taulell) {
-
         return taulell;
     }
 
-    static boolean ComprovarFinal() {
+    static void BorrarLinia(String[][] taulell, int files, int columnes) {
+
+        int contador = 0, fila = 0;
+
+        for (int i = 0; i <= files; i++) {
+            for (int j = 0; j <= columnes + 1; j++) {
+                if (taulell[i][j].equals(PLENA)) {
+                    contador++;
+                    if (contador == columnes) {
+                        for (int k = 0; k <= columnes + 1; k++) {
+                            taulell[i][k] = BUIDA;
+                            fila = i;
+                        }
+                        for (int t = 1; t < fila; t++) {
+                            for (int k = 0; k <= columnes + 1; k++) {
+                                taulell[t - 1][k] = taulell[t][k];
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+    }
+
+    static boolean ComprovarFinal(String[][] taulell, int meitat) {
 
         boolean comprovacio = false;
+
+        if (taulell[0][meitat].equals(PLENA)) {
+            comprovacio = true;
+        }
 
         return comprovacio;
     }

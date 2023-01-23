@@ -9,18 +9,18 @@ public class TetrisMain {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
 
-        boolean repetir = true;
-        int columnes, files, meitat, peca;
+        int columnes, files, meitat = 0, peca;
         String[][] taulell, moviments;
 
-        while (repetir == true && !TetrisFuncions.ComprovarFinal()) {
-            System.out.println("Quantes columnes vols que tingui el taulell?");
-            columnes = s.nextInt();
-            System.out.println("Quantes files vols que tingui el taulell?");
-            files = s.nextInt();
+        System.out.println("Quantes columnes vols que tingui el taulell?");
+        columnes = s.nextInt();
+        System.out.println("Quantes files vols que tingui el taulell?");
+        files = s.nextInt();
 
-            taulell = TetrisFuncions.CrearTaulell(files, columnes);
-            moviments = TetrisFuncions.CrearMoviments(columnes);
+        taulell = TetrisFuncions.CrearTaulell(files, columnes);
+        moviments = TetrisFuncions.CrearMoviments(columnes);
+
+        while (TetrisFuncions.ComprovarFinal(taulell, meitat) == false) {
 
             if (columnes % 2 == 0) {
                 meitat = columnes / 2;
@@ -28,10 +28,12 @@ public class TetrisMain {
                 meitat = (columnes + 1) / 2;
             }
 
-            while (!TetrisFuncions.ComprovarFinal()) {
-                peca = (int)(Math.random()*PECES+1);
-                TetrisFuncions.ImprimirPeca(peca, moviments, taulell, files, columnes, meitat);
-            }
+            peca = (int) (Math.random() * PECES + 1);
+            TetrisFuncions.ImprimirPeca(peca, moviments, taulell, files, columnes, meitat);
+            meitat = TetrisFuncions.MourePeca(peca, moviments, taulell, meitat, files, columnes);
+            taulell = TetrisFuncions.BaixarPeca(peca, meitat, files, columnes, taulell);
+            TetrisFuncions.BorrarLinia(taulell, files, columnes);
+            moviments = TetrisFuncions.CrearMoviments(columnes);
         }
 
     }
