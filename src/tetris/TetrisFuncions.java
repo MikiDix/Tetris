@@ -204,11 +204,11 @@ public class TetrisFuncions {
         int contador = 0, fila = 0;
 
         for (int i = 0; i <= files; i++) {
-            for (int j = 0; j <= columnes + 1; j++) {
+            for (int j = 1; j <= columnes; j++) {
                 if (taulell[i][j].equals(PLENA)) {
                     contador++;
                     if (contador == columnes) {
-                        for (int k = 0; k <= columnes + 1; k++) {
+                        for (int k = 1; k <= columnes; k++) {
                             taulell[i][k] = BUIDA;
                             fila = i;
                         }
