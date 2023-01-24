@@ -136,7 +136,7 @@ public class TetrisFuncions {
             }
 
         } while (!"s".equals(resposta));
-        
+
         return meitat;
 
     }
@@ -148,7 +148,7 @@ public class TetrisFuncions {
         switch (peca) {
             case 1:
                 for (int i = 0; taulell[i + 1][meitat].equals(BUIDA) && taulell[i + 1][meitat + 1].equals(BUIDA); i++) {
-                    fila = i;
+                    fila = i+1;
                 }
                 for (int i = 0; i < files; i++) {
                     for (int j = 1; j <= columnes; j++) {
@@ -160,7 +160,7 @@ public class TetrisFuncions {
                 break;
             case 2:
                 for (int i = 0; taulell[i + 1][meitat].equals(BUIDA) && taulell[i + 1][meitat + 1].equals(BUIDA) && taulell[i + 1][meitat + 2].equals(BUIDA); i++) {
-                    fila = i;
+                    fila = i+1;
                 }
                 for (int i = 0; i < files; i++) {
                     for (int j = 1; j <= columnes; j++) {
@@ -172,7 +172,7 @@ public class TetrisFuncions {
                 break;
             case 3:
                 for (int i = 0; taulell[i + 1][meitat].equals(BUIDA) && taulell[i + 1][meitat + 1].equals(BUIDA); i++) {
-                    fila = i;
+                    fila = i+1;
                 }
                 for (int i = 0; i < files; i++) {
                     for (int j = 1; j <= columnes; j++) {
@@ -184,7 +184,7 @@ public class TetrisFuncions {
                 break;
             case 4:
                 for (int i = 0; taulell[i + 1][meitat].equals(BUIDA); i++) {
-                    fila = i;
+                    fila = i+1;
                 }
                 for (int i = 0; i < files; i++) {
                     for (int j = 1; j <= columnes; j++) {
@@ -212,14 +212,15 @@ public class TetrisFuncions {
                             taulell[i][k] = BUIDA;
                             fila = i;
                         }
-                        for (int t = 1; t < fila; t++) {
+                        for (int t = fila; t >= 1; t--) {
                             for (int k = 0; k <= columnes + 1; k++) {
-                                taulell[t - 1][k] = taulell[t][k];
+                                taulell[t][k] = taulell[t - 1][k];
                             }
                         }
                     }
                 }
             }
+            contador = 0;
 
         }
 
