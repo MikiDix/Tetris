@@ -119,20 +119,53 @@ public class TetrisFuncions {
 
         Scanner s = new Scanner(System.in);
         String resposta;
+        boolean mouredreta = true, moureesquerra = true;
 
         do {
             System.out.println("Vols moure la peça? (Dreta='a' i Esquerra='d'");
             System.out.println("Per baixar la peça: 's'");
             resposta = s.nextLine();
 
-            if ("a".equals(resposta)) {
+            if (meitat == 1 && "a".equals(resposta)) {
+                moureesquerra = false;
+                System.out.println("No pots moure en aquesta direcció");
+            }
+
+            switch(peca){
+                case 1:
+                    if((meitat+1)==columnes && "d".equals(resposta)){
+                        mouredreta=false;
+                        System.out.println("No pots moure en aquesta direcció");
+                    }
+                case 2:
+                    if((meitat+2)==columnes && "d".equals(resposta)){
+                        mouredreta=false;
+                        System.out.println("No pots moure en aquesta direcció");
+                    }
+                case 3:
+                    if((meitat+1)==columnes && "d".equals(resposta)){
+                        mouredreta=false;
+                        System.out.println("No pots moure en aquesta direcció");
+                    }
+                case 4:
+                    if((meitat)==columnes && "d".equals(resposta)){
+                        mouredreta=false;
+                        System.out.println("No pots moure en aquesta direcció");
+                    }
+            }
+
+            if ("a".equals(resposta) && moureesquerra == true) {
                 meitat--;
                 moviments = CrearMoviments(columnes);
+                mouredreta=true;
                 ImprimirPeca(peca, moviments, taulell, files, columnes, meitat);
-            } else if ("d".equals(resposta)) {
+
+            } else if ("d".equals(resposta) && mouredreta==true) {
                 meitat++;
                 moviments = CrearMoviments(columnes);
+                moureesquerra=true;
                 ImprimirPeca(peca, moviments, taulell, files, columnes, meitat);
+
             }
 
         } while (!"s".equals(resposta));
@@ -148,7 +181,7 @@ public class TetrisFuncions {
         switch (peca) {
             case 1:
                 for (int i = 0; taulell[i + 1][meitat].equals(BUIDA) && taulell[i + 1][meitat + 1].equals(BUIDA); i++) {
-                    fila = i+1;
+                    fila = i + 1;
                 }
                 for (int i = 0; i < files; i++) {
                     for (int j = 1; j <= columnes; j++) {
@@ -160,7 +193,7 @@ public class TetrisFuncions {
                 break;
             case 2:
                 for (int i = 0; taulell[i + 1][meitat].equals(BUIDA) && taulell[i + 1][meitat + 1].equals(BUIDA) && taulell[i + 1][meitat + 2].equals(BUIDA); i++) {
-                    fila = i+1;
+                    fila = i + 1;
                 }
                 for (int i = 0; i < files; i++) {
                     for (int j = 1; j <= columnes; j++) {
@@ -172,7 +205,7 @@ public class TetrisFuncions {
                 break;
             case 3:
                 for (int i = 0; taulell[i + 1][meitat].equals(BUIDA) && taulell[i + 1][meitat + 1].equals(BUIDA); i++) {
-                    fila = i+1;
+                    fila = i + 1;
                 }
                 for (int i = 0; i < files; i++) {
                     for (int j = 1; j <= columnes; j++) {
@@ -184,7 +217,7 @@ public class TetrisFuncions {
                 break;
             case 4:
                 for (int i = 0; taulell[i + 1][meitat].equals(BUIDA); i++) {
-                    fila = i+1;
+                    fila = i + 1;
                 }
                 for (int i = 0; i < files; i++) {
                     for (int j = 1; j <= columnes; j++) {
