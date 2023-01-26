@@ -11,15 +11,18 @@ public class TetrisMain {
         Scanner s = new Scanner(System.in);
 
         //definim les variables 
-        int columnes, files, meitat = 0, peca;
+        int columnes = 0, files = 0, meitat = 0, peca;
         String[][] taulell, moviments;
 
         //demanem les files i les columnes per fer la matriu
-        System.out.println("Quantes columnes vols que tingui el taulell?");
-        columnes = s.nextInt();
-        System.out.println("Quantes files vols que tingui el taulell?");
-        files = s.nextInt();
-
+        while (columnes < 5) {
+            System.out.println("Quantes columnes vols que tingui el taulell?");
+            columnes = s.nextInt();
+        }
+        while (files < 4) {
+            System.out.println("Quantes files vols que tingui el taulell?");
+            files = s.nextInt();
+        }
         taulell = TetrisFuncions.CrearTaulell(files, columnes);
         moviments = TetrisFuncions.CrearMoviments(columnes);
 

@@ -31,7 +31,7 @@ public class TetrisFuncions {
         return taulell;
     }
 
-    //
+    //Creem la zona on apareixeran les peces abans de baixar-les
     static String[][] CrearMoviments(int columnes) {
 
         String[][] moviments = new String[5][columnes + 2];
@@ -51,7 +51,7 @@ public class TetrisFuncions {
         return moviments;
     }
 
-    //
+    //Imprimeix la zona de moviments
     static void MostrarMoviments(String[][] moviments, int files, int columnes) {
 
         for (int i = 0; i < 5; i++) {
@@ -122,7 +122,7 @@ public class TetrisFuncions {
 
     }
 
-    //fem una funcio per moure la peça a la matriu de dalt per i amb "s" surt del bucle i baixa la peça
+    //fem una funcio per moure la peça a la matriu de dalt i amb "s" surt del bucle i baixa la peça
     static int MourePeca(int peca, String[][] moviments, String[][] taulell, int meitat, int files, int columnes) {
 
         Scanner s = new Scanner(System.in);
@@ -139,25 +139,25 @@ public class TetrisFuncions {
                 System.out.println("No pots moure en aquesta direcció");
             }
 
-            switch(peca){
+            switch (peca) {
                 case 1:
-                    if((meitat+1)==columnes && "d".equals(resposta)){
-                        mouredreta=false;
+                    if ((meitat + 1) == columnes && "d".equals(resposta)) {
+                        mouredreta = false;
                         System.out.println("No pots moure en aquesta direcció");
                     }
                 case 2:
-                    if((meitat+2)==columnes && "d".equals(resposta)){
-                        mouredreta=false;
+                    if ((meitat + 2) == columnes && "d".equals(resposta)) {
+                        mouredreta = false;
                         System.out.println("No pots moure en aquesta direcció");
                     }
                 case 3:
-                    if((meitat+1)==columnes && "d".equals(resposta)){
-                        mouredreta=false;
+                    if ((meitat + 1) == columnes && "d".equals(resposta)) {
+                        mouredreta = false;
                         System.out.println("No pots moure en aquesta direcció");
                     }
                 case 4:
-                    if((meitat)==columnes && "d".equals(resposta)){
-                        mouredreta=false;
+                    if ((meitat) == columnes && "d".equals(resposta)) {
+                        mouredreta = false;
                         System.out.println("No pots moure en aquesta direcció");
                     }
             }
@@ -165,13 +165,13 @@ public class TetrisFuncions {
             if ("a".equals(resposta) && moureesquerra == true) {
                 meitat--;
                 moviments = CrearMoviments(columnes);
-                mouredreta=true;
+                mouredreta = true;
                 ImprimirPeca(peca, moviments, taulell, files, columnes, meitat);
 
-            } else if ("d".equals(resposta) && mouredreta==true) {
+            } else if ("d".equals(resposta) && mouredreta == true) {
                 meitat++;
                 moviments = CrearMoviments(columnes);
-                moureesquerra=true;
+                moureesquerra = true;
                 ImprimirPeca(peca, moviments, taulell, files, columnes, meitat);
 
             }
@@ -182,7 +182,7 @@ public class TetrisFuncions {
 
     }
 
-    //
+    //Depenen de la peça es comproven unes caselles o unes altres, les peces baixaran mentres que les caselles inferiors necessàries estiguin buides
     static String[][] BaixarPeca(int peca, int meitat, int files, int columnes, String[][] taulell) {
 
         int fila = 0;
@@ -241,7 +241,7 @@ public class TetrisFuncions {
         return taulell;
     }
 
-    //comprobem si la linea esta plena, llavos es borra
+    //comprobem si la linea esta plena, llavors es borra
     static void BorrarLinia(String[][] taulell, int files, int columnes) {
 
         int contador = 0, fila = 0;
