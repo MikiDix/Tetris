@@ -36,10 +36,15 @@ public class TetrisMain {
 
             //generem la peça de forma aleatoria 
             peca = (int) (Math.random() * PECES + 1);
+            //imprimir la peça 
             TetrisFuncions.ImprimirPeca(peca, moviments, taulell, files, columnes, meitat);
+            //moure la peça
             meitat = TetrisFuncions.MourePeca(peca, moviments, taulell, meitat, files, columnes);
+            //baixar la peça ja moguda 
             taulell = TetrisFuncions.BaixarPeca(peca, meitat, files, columnes, taulell);
+            //borrar la linea si ja esta plena
             TetrisFuncions.BorrarLinia(taulell, files, columnes);
+            //detecta la posicio final de la peça 
             moviments = TetrisFuncions.CrearMoviments(columnes);
         }
 
