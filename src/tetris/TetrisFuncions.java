@@ -4,15 +4,18 @@ import java.util.Scanner;
 
 public class TetrisFuncions {
 
+    //fem final String per divuixar la matriu 
     final static String PARET = "|";
     final static String TERRA = "_";
     final static String BUIDA = " ";
     final static String PLENA = "X";
 
+    //creem una funció per crear el taulell
     static String[][] CrearTaulell(int files, int columnes) {
 
         String[][] taulell = new String[files + 6][columnes + 2];
 
+        //fem un bucle per pintar les parets, el terra, i les caselles buides 
         for (int i = 0; i <= files; i++) {
             for (int j = 0; j <= columnes + 1; j++) {
                 if (i == files) {
@@ -28,6 +31,7 @@ public class TetrisFuncions {
         return taulell;
     }
 
+    //
     static String[][] CrearMoviments(int columnes) {
 
         String[][] moviments = new String[5][columnes + 2];
@@ -47,6 +51,7 @@ public class TetrisFuncions {
         return moviments;
     }
 
+    //
     static void MostrarMoviments(String[][] moviments, int files, int columnes) {
 
         for (int i = 0; i < 5; i++) {
@@ -57,6 +62,7 @@ public class TetrisFuncions {
         }
     }
 
+    //imprimeix el taulell 
     static void MostrarTaulell(String[][] taulell, int files, int columnes) {
 
         for (int i = 0; i <= files; i++) {
@@ -67,6 +73,7 @@ public class TetrisFuncions {
         }
     }
 
+    //creem la peça de manera aleatoria i depen de la que sigui, fa un case o un altre 
     static void ImprimirPeca(int peca, String[][] moviments, String[][] taulell, int files, int columnes, int meitat) {
 
         switch (peca) {
@@ -115,6 +122,7 @@ public class TetrisFuncions {
 
     }
 
+    //fem una funcio per moure la peça a la matriu de dalt per i amb "s" surt del bucle i baixa la peça
     static int MourePeca(int peca, String[][] moviments, String[][] taulell, int meitat, int files, int columnes) {
 
         Scanner s = new Scanner(System.in);
@@ -174,6 +182,7 @@ public class TetrisFuncions {
 
     }
 
+    //
     static String[][] BaixarPeca(int peca, int meitat, int files, int columnes, String[][] taulell) {
 
         int fila = 0;
@@ -232,6 +241,7 @@ public class TetrisFuncions {
         return taulell;
     }
 
+    //comprobem si la linea esta plena, llavos es borra
     static void BorrarLinia(String[][] taulell, int files, int columnes) {
 
         int contador = 0, fila = 0;
@@ -259,6 +269,7 @@ public class TetrisFuncions {
 
     }
 
+    //fem una funcio per comprobar si la matriu esta plena, llavors acaba la partida 
     static boolean ComprovarFinal(String[][] taulell, int meitat) {
 
         boolean comprovacio = false;
