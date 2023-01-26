@@ -4,14 +4,17 @@ import java.util.Scanner;
 
 public class TetrisMain {
 
+    //defim el numero de peces
     final static int PECES = 4;
 
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
 
+        //definim les variables 
         int columnes, files, meitat = 0, peca;
         String[][] taulell, moviments;
 
+        //demanem les files i les columnes per fer la matriu
         System.out.println("Quantes columnes vols que tingui el taulell?");
         columnes = s.nextInt();
         System.out.println("Quantes files vols que tingui el taulell?");
@@ -20,6 +23,7 @@ public class TetrisMain {
         taulell = TetrisFuncions.CrearTaulell(files, columnes);
         moviments = TetrisFuncions.CrearMoviments(columnes);
 
+        //fem el bucle fins que ComprovarFinal sigui true 
         while (TetrisFuncions.ComprovarFinal(taulell, meitat) == false) {
 
             if (columnes % 2 == 0) {
